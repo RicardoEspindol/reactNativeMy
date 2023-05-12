@@ -1,10 +1,18 @@
 import React, { useState } from 'react';
 import { StyleSheet, TouchableOpacity, Text, View, TextInput, ScrollView} from 'react-native';
+import { CheckBox } from 'react-native-elements';
 
 export default function App() {
 
   const [listaDeTextos, setListaDeTextos] = useState([]);
   const [novoTexto, setNovoTexto] = useState('');
+  const [checkedItems, setCheckedItems] = useState([]);
+
+  const handleCheckBoxClick = (index) => {
+    const newCheckedItems = [...checkedItems];
+    newCheckedItems[index] = !newCheckedItems[index];
+    setCheckedItems(newCheckedItems);
+  }
 
   return (
     <View style={styles.container}>
@@ -21,9 +29,11 @@ export default function App() {
            onPress={() => {
             if(novoTexto != '' && !listaDeTextos.includes(novoTexto)){
               setListaDeTextos([...listaDeTextos, novoTexto]);
-            setNovoTexto('');
+              setCheckedItems([...checkedItems, false]);
+              setNovoTexto('');
             }else{
-              setListaDeTextos([...listaDeTextos])
+              setListaDeTextos([...listaDeTextos]);
+              setCheckedItems([...checkedItems]);
             }
            
           }}>
@@ -36,11 +46,16 @@ export default function App() {
 
           (listaDeTextos.map((texto, index) => (
           <View key={index} style={styles.gridv}>
+          <CheckBox
+            checked={checkedItems[index]}
+            onPress={() => handleCheckBoxClick(index)}
+          />
             <Text style={styles.texto}>{texto}</Text>
             <View>
               <TouchableOpacity style={styles.button2}
                 onPress={() => {
                   setListaDeTextos(listaDeTextos.filter((texto, indexAtual) => indexAtual !== index));
+                  setCheckedItems(checkedItems.filter((isChecked, indexAtual) => indexAtual !== index));
                 }}>
                 <Text style={styles.buttonText}>Excluir</Text>
               </TouchableOpacity>
