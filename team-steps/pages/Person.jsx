@@ -1,6 +1,8 @@
-import { StyleSheet, View , Text, Image, TextInput, TouchableOpacity} from 'react-native';
-import Button2 from '../components/Button2';
+import { StyleSheet, View , Text, Image, TextInput, TouchableOpacity, ScrollView} from 'react-native';
+import ButtonRemove from '../components/ButtonRemove';
 import UpMenu from '../components/UpMenu';
+import Horizon from '../components/Horizon';
+import Participante from '../components/Participante';
 
 const Person = () => {
 
@@ -14,15 +16,40 @@ const Person = () => {
             <View style={styles.add}>
                 <TextInput
                     style={styles.input}
-                    placeholder="Nome da turma"
+                    placeholder="Nome do participante"
                     placeholderTextColor="#A9A9A9"
                 />
                 <TouchableOpacity>
                     <Image style={styles.plus} source={require('../img/plus.png')}></Image>
                 </TouchableOpacity>
             </View>
-            
-            <Button2 name= 'Criar'/>
+            <View style={styles.horizon}>
+                <ScrollView horizontal style={styles.scrol}>
+                    <Horizon name='TIME A'/>
+                    <Horizon name='TIME X'/>
+                    <Horizon name='TIME X'/>
+                    <Horizon name='TIME X'/>
+                    <Horizon name='TIME X'/>
+
+                </ScrollView>
+                <View style={styles.text}>
+                    <Text style={styles.total}>2</Text>
+                </View>
+            </View>
+            <ScrollView>
+                <Participante name='Rodrigo Gonçalves'/>
+                <Participante name='Rodrigo Gonçalves'/>
+
+                <Participante name='Rodrigo Gonçalves'/>
+                <Participante name='Rodrigo Gonçalves'/>
+                <Participante name='Rodrigo Gonçalves'/>
+                <Participante name='Rodrigo Gonçalves'/>
+                <Participante name='Rodrigo Gonçalves'/>
+                <Participante name='Rodrigo Gonçalves'/>
+
+
+            </ScrollView>
+            <ButtonRemove name= 'Remover turma'/>
         </View>
     )
 }
@@ -40,7 +67,7 @@ const styles = StyleSheet.create({
     },
     turma:{
         color: '#fff',
-        marginTop: 45,
+        marginTop: 40,
         fontSize: 23,
         fontWeight: '500',
     },
@@ -74,5 +101,25 @@ const styles = StyleSheet.create({
         height: 50,
         marginLeft: 0,
 
+      },
+      horizon:{
+        width: '85%',
+        flexDirection: 'row',
+        alignItems: 'center',
+        marginBottom: 15,
+      },
+      text:{
+        width: '8%',
+        height: 40,
+        justifyContent: 'center',
+        alignItems: 'flex-end',
+        // backgroundColor: 'blue',
+      },
+      total:{
+        color: 'white',
+        textDecorationLine: 'underline',
+        color: 'yellow',
+        fontWeight: 700,
+        fontSize: 14
       }
   });
